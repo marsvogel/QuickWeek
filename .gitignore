@@ -1,5 +1,20 @@
-# Compiled binary
-QuickWeek
+# Xcode
+build/
+DerivedData/
+*.xcuserstate
+*.xccheckout
+*.xcscmblueprint
+xcuserdata/
 
 # macOS
 .DS_Store
+*.swp
+*~
+
+# Archives
+*.xcarchive
+
+# Swift Package Manager
+.build/
+Packages/
+Package.resolved

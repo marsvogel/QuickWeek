@@ -5,6 +5,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var timer: Timer?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        // Hide from dock
+        NSApp.setActivationPolicy(.accessory)
+
         // Create status bar item
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
@@ -36,10 +39,3 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSApplication.shared.terminate(nil)
     }
 }
-
-// Main entry point
-let app = NSApplication.shared
-let delegate = AppDelegate()
-app.delegate = delegate
-app.setActivationPolicy(.accessory) // Hide from dock
-app.run()
