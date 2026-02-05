@@ -10,6 +10,7 @@
 		A11111110000000000000001 /* QuickWeekApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000001 /* QuickWeekApp.swift */; };
 		A11111110000000000000002 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000002 /* AppDelegate.swift */; };
 		A11111110000000000000003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000003 /* Assets.xcassets */; };
+		A11111110000000000000004 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000006 /* CalendarView.swift */; };
 		D62AEE222F34D6EF0003FC59 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = D62AEE212F34D6EF0003FC59 /* AppIcon.icon */; };
 /* End PBXBuildFile section */
 
@@ -19,6 +20,7 @@
 		A10000000000000000000003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A10000000000000000000004 /* QuickWeek.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QuickWeek.entitlements; sourceTree = "<group>"; };
 		A10000000000000000000005 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A10000000000000000000006 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		A10000000000000000000010 /* QuickWeek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickWeek.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D62AEE212F34D6EF0003FC59 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -48,6 +50,7 @@
 			children = (
 				A10000000000000000000001 /* QuickWeekApp.swift */,
 				A10000000000000000000002 /* AppDelegate.swift */,
+				A10000000000000000000006 /* CalendarView.swift */,
 				A10000000000000000000003 /* Assets.xcassets */,
 				A10000000000000000000004 /* QuickWeek.entitlements */,
 				A10000000000000000000005 /* Info.plist */,
@@ -136,6 +139,7 @@
 			files = (
 				A11111110000000000000001 /* QuickWeekApp.swift in Sources */,
 				A11111110000000000000002 /* AppDelegate.swift in Sources */,
+				A11111110000000000000004 /* CalendarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
