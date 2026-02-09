@@ -15,10 +15,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         updateCalendarWeek()
 
-        // Update every hour (calendar week doesn't change often)
+        // Update every hour as fallback
         timer = Timer.scheduledTimer(withTimeInterval: 3600, repeats: true) { [weak self] _ in
             self?.updateCalendarWeek()
         }
+
+        // Update immediately when the date changes (midnight)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleDateChange),
+            name: .NSCalendarDayChanged,
+            object: nil
+        )
+
+        // Update when waking from sleep
+        NSWorkspace.shared.notificationCenter.addObserver(
+            self,
+            selector: #selector(handleDateChange),
+            name: NSWorkspace.didWakeNotification,
+            object: nil
+        )
 
         // Create popover with calendar view
         popover = NSPopover()
@@ -40,6 +56,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let button = statusItem.button {
             button.title = String(format: "KW%02d", weekNumber)
         }
+    }
+
+    @objc func handleDateChange() {
+        updateCalendarWeek()
+        // Recreate popover content so CalendarView picks up the new date
+        popover.contentViewController = NSHostingController(rootView: CalendarView())
     }
 
     @objc func togglePopover(_ sender: AnyObject?) {

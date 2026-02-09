@@ -95,6 +95,9 @@ struct CalendarView: View {
         }
         .padding(12)
         .frame(width: 280)
+        .onAppear {
+            displayedMonth = Date()
+        }
     }
 
     // MARK: - Computed Properties
