@@ -1,11 +1,11 @@
 #!/bin/bash
-# Setzt die Build-Nummer automatisch basierend auf Git-Commits
+# Sets the build number automatically from the number of Git commits.
 #
-# HINWEIS: Das eigentliche Script ist inline in der Xcode Build Phase
-# "Build-Nummer setzen" hinterlegt (project.pbxproj), weil die
-# Script-Sandbox keinen Zugriff auf externe Dateien erlaubt.
+# NOTE: The script that actually runs is inlined into the Xcode build phase
+# "Set build number" (project.pbxproj), because the build sandbox does not
+# allow reading external files.
 #
-# Dieses Script dient nur als Referenz und für manuelle Ausführung:
+# This file is kept only as a reference and for manual invocation:
 #   PROJECT_DIR="$(pwd)" bash Scripts/increment-build-number.sh
 
 set -e
@@ -13,15 +13,15 @@ set -e
 cd "${PROJECT_DIR:-${SRCROOT:-.}}"
 
 if ! git rev-parse --git-dir > /dev/null 2>&1; then
-    echo "warning: Kein Git-Repository gefunden"
+    echo "warning: no Git repository found"
     exit 0
 fi
 
 BUILD_NUMBER=$(git rev-list --count HEAD)
 
 if [ -z "$BUILD_NUMBER" ] || [ "$BUILD_NUMBER" -lt 1 ]; then
-    echo "warning: Konnte Git-Commit-Anzahl nicht ermitteln"
+    echo "warning: could not determine the Git commit count"
     exit 0
 fi
 
-echo "Aktuelle Build-Nummer sollte sein: ${BUILD_NUMBER} (basierend auf ${BUILD_NUMBER} Git-Commits)"
+echo "Build number should be: ${BUILD_NUMBER} (based on ${BUILD_NUMBER} Git commits)"

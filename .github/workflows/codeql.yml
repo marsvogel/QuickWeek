@@ -1,0 +1,68 @@
+# CodeQL advanced setup, replacing GitHub's default setup so the Swift build is
+# driven explicitly (build-mode: manual) instead of relying on the autobuilder.
+name: CodeQL
+
+on:
+  push:
+    branches: [main]
+  # Restricted to PRs against main: only main receives push (baseline) analyses,
+  # so results for other base branches could not be compared to anything.
+  # Markdown-only PRs have no analyzable surface and skip the expensive macOS job.
+  pull_request:
+    branches: [main]
+    paths-ignore:
+      - "**/*.md"
+  schedule:
+    - cron: "27 6 * * 1"
+  workflow_dispatch:
+
+# Superseded runs (e.g. rapid successive pushes to a PR) analyze obsolete
+# commits; cancel them instead of letting them occupy macOS runner slots.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions: {}
+
+jobs:
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    runs-on: ${{ matrix.runner }}
+    permissions:
+      contents: read
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - language: actions
+            build-mode: none
+            runner: ubuntu-latest
+          - language: swift
+            build-mode: manual
+            runner: macos-26
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@7188fc363630916deb702c7fdcf4e481b751f97a # v4
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: ${{ matrix.build-mode }}
+
+      # Ad-hoc signing for the same reason as in build.yml; CodeQL only needs the
+      # compile to succeed so the extractor can trace it. build-for-testing compiles
+      # the app and the test target, so test code is analyzed too.
+      - name: Build
+        if: matrix.language == 'swift'
+        run: |
+          xcodebuild build-for-testing -project QuickWeek.xcodeproj \
+            -scheme QuickWeek \
+            CODE_SIGN_IDENTITY="-"
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@7188fc363630916deb702c7fdcf4e481b751f97a # v4
+        with:
+          category: "/language:${{ matrix.language }}"

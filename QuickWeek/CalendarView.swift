@@ -3,8 +3,8 @@ import SwiftUI
 struct CalendarView: View {
     @State private var displayedMonth: Date = Date()
 
-    private let calendar = Calendar(identifier: .iso8601)
-    private let weekdaySymbols = ["M", "D", "M", "D", "F", "S", "S"]
+    private let calendar = WeekCalculator.calendar
+    private let weekdaySymbols = ["M", "T", "W", "T", "F", "S", "S"]
 
     var body: some View {
         VStack(spacing: 12) {
@@ -85,7 +85,7 @@ struct CalendarView: View {
                 .padding(.top, 4)
 
             Button(action: goToToday) {
-                Text("Heute")
+                Text("Today")
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.plain)
@@ -104,37 +104,19 @@ struct CalendarView: View {
 
     private var monthYearString: String {
         let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "de_DE")
+        formatter.locale = Locale(identifier: "en_US")
         formatter.dateFormat = "MMMM yyyy"
         return formatter.string(from: displayedMonth)
     }
 
     private var weeksInMonth: [[Date]] {
-        guard let monthInterval = calendar.dateInterval(of: .month, for: displayedMonth),
-              let monthFirstWeek = calendar.dateInterval(of: .weekOfMonth, for: monthInterval.start),
-              let monthLastWeek = calendar.dateInterval(of: .weekOfMonth, for: monthInterval.end - 1) else {
-            return []
-        }
-
-        var weeks: [[Date]] = []
-        var currentDate = monthFirstWeek.start
-
-        while currentDate < monthLastWeek.end {
-            var week: [Date] = []
-            for _ in 0..<7 {
-                week.append(currentDate)
-                currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate) ?? currentDate
-            }
-            weeks.append(week)
-        }
-
-        return weeks
+        WeekCalculator.weeks(inMonthOf: displayedMonth, calendar: calendar)
     }
 
     // MARK: - Helper Methods
 
     private func weekNumber(for date: Date) -> Int {
-        calendar.component(.weekOfYear, from: date)
+        WeekCalculator.isoWeekNumber(for: date, calendar: calendar)
     }
 
     private func isInDisplayedMonth(_ date: Date) -> Bool {
@@ -150,8 +132,7 @@ struct CalendarView: View {
     }
 
     private func isWeekend(_ date: Date) -> Bool {
-        let weekday = calendar.component(.weekday, from: date)
-        return weekday == 1 || weekday == 7 // Sunday = 1, Saturday = 7
+        WeekCalculator.isWeekend(date, calendar: calendar)
     }
 
     private func previousMonth() {
@@ -174,7 +155,7 @@ struct DayCell: View {
     let isInCurrentWeek: Bool
     let isWeekend: Bool
 
-    private let calendar = Calendar(identifier: .iso8601)
+    private let calendar = WeekCalculator.calendar
 
     var body: some View {
         let day = calendar.component(.day, from: date)

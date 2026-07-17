@@ -50,12 +50,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func updateCalendarWeek() {
-        let calendar = Calendar(identifier: .iso8601)
-        let weekNumber = calendar.component(.weekOfYear, from: Date())
-
-        if let button = statusItem.button {
-            button.title = String(format: "KW%02d", weekNumber)
-        }
+        statusItem.button?.title = WeekCalculator.menuBarTitle(for: Date())
     }
 
     @objc func handleDateChange() {
@@ -70,9 +65,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if event.type == .rightMouseUp {
             // Right click - show context menu
             let menu = NSMenu()
-            menu.addItem(NSMenuItem(title: "Quick Week", action: nil, keyEquivalent: ""))
+            menu.addItem(NSMenuItem(title: "QuickWeek", action: nil, keyEquivalent: ""))
             menu.addItem(NSMenuItem.separator())
-            menu.addItem(NSMenuItem(title: "Beenden", action: #selector(quit), keyEquivalent: "q"))
+            menu.addItem(NSMenuItem(title: "Quit", action: #selector(quit), keyEquivalent: "q"))
             statusItem.menu = menu
             statusItem.button?.performClick(nil)
             statusItem.menu = nil

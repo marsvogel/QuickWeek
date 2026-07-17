@@ -1,0 +1,118 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# Deny-all by default; each job opts into the minimum it needs.
+permissions: {}
+
+jobs:
+  build:
+    runs-on: macos-26
+    permissions:
+      contents: read
+    outputs:
+      marketing_version: ${{ steps.version.outputs.marketing_version }}
+      build_number: ${{ steps.version.outputs.build_number }}
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          # The "Set build number" build phase derives CFBundleVersion from the
+          # commit count, so the full history has to be present.
+          fetch-depth: 0
+          persist-credentials: false
+
+      # Pinned to a fixed version so new SwiftLint rules can't suddenly break CI (--strict),
+      # and checksum-verified so a swapped release asset cannot run in CI unnoticed.
+      - name: SwiftLint
+        env:
+          SWIFTLINT_VERSION: 0.65.0
+          SWIFTLINT_SHA256: d6cb0aa7a2f5f1ef306fc9e37bcb54dc9a26facc8f7784ac0c3dd3eccf5c6ba6
+        run: |
+          curl -fsSL -o swiftlint.zip \
+            "https://github.com/realm/SwiftLint/releases/download/${SWIFTLINT_VERSION}/portable_swiftlint.zip"
+          echo "${SWIFTLINT_SHA256}  swiftlint.zip" | shasum -a 256 -c -
+          unzip -o -q swiftlint.zip -d swiftlint-bin
+          ./swiftlint-bin/swiftlint lint --strict --reporter github-actions-logging
+
+      - name: Test
+        run: |
+          xcodebuild test -project QuickWeek.xcodeproj \
+            -scheme QuickWeek \
+            CODE_SIGN_IDENTITY="-"
+
+      # Ad-hoc signing ("-") keeps the app launchable on Apple Silicon (an unsigned
+      # binary is killed on launch) without a paid Developer ID. The build target
+      # emits the app into build/Release.
+      - name: Build (ad-hoc signed)
+        run: |
+          xcodebuild -project QuickWeek.xcodeproj \
+            -target QuickWeek \
+            -configuration Release \
+            CODE_SIGN_IDENTITY="-" \
+            build
+
+      - name: Read versions
+        id: version
+        run: |
+          MARKETING_VERSION=$(xcodebuild -project QuickWeek.xcodeproj \
+            -target QuickWeek -configuration Release -showBuildSettings 2>/dev/null \
+            | awk '$1 == "MARKETING_VERSION" {print $3; exit}')
+          echo "marketing_version=${MARKETING_VERSION}" >> "$GITHUB_OUTPUT"
+          echo "build_number=$(git rev-list --count HEAD)" >> "$GITHUB_OUTPUT"
+
+      # ditto (not zip) preserves the .app bundle structure and its ad-hoc signature.
+      - name: Package app as ZIP
+        run: ditto -c -k --keepParent build/Release/QuickWeek.app QuickWeek.zip
+
+      - name: Compute checksum
+        run: shasum -a 256 QuickWeek.zip | tee QuickWeek.zip.sha256
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: QuickWeek
+          path: |
+            QuickWeek.zip
+            QuickWeek.zip.sha256
+
+  # Separate job so write scopes are only granted where the release is created.
+  release:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # create the GitHub release
+      id-token: write # sign the build-provenance attestation
+      attestations: write # store the attestation
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: QuickWeek
+
+      # Binds the exact ZIP to the workflow run and source commit; users can verify
+      # it with: gh attestation verify QuickWeek.zip -R marsvogel/QuickWeek
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@0f67c3f4856b2e3261c31976d6725780e5e4c373 # v4.1.1
+        with:
+          subject-path: QuickWeek.zip
+
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          TAG="v${{ needs.build.outputs.marketing_version }}.${{ needs.build.outputs.build_number }}"
+          # Idempotent: a re-run on the same commit must not hard-fail on an existing release.
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists — skipping."
+            exit 0
+          fi
+          gh release create "$TAG" QuickWeek.zip QuickWeek.zip.sha256 \
+            --title "$TAG" \
+            --generate-notes \
+            --target "$GITHUB_SHA"

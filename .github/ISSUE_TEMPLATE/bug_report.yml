@@ -1,0 +1,39 @@
+name: Bug report
+description: Something does not work as expected
+labels: [bug]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe the problem, and what you expected instead.
+    validations:
+      required: true
+  - type: input
+    id: macos-version
+    attributes:
+      label: macOS version
+      placeholder: e.g. macOS 15.5
+    validations:
+      required: true
+  - type: input
+    id: app-version
+    attributes:
+      label: QuickWeek version
+      description: The release tag you downloaded, e.g. v1.0.6 (or "built from source")
+    validations:
+      required: true
+  - type: dropdown
+    id: install-method
+    attributes:
+      label: How did you install it?
+      options:
+        - Downloaded release ZIP
+        - Built from source
+    validations:
+      required: false
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else?
+      description: Console output, screenshots, or other context. Please redact personal data.
