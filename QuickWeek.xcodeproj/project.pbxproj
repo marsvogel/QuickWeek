@@ -7,14 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0611BE03FD261096CB047FDE /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D5A8755F2744AFCB140665B /* Cocoa.framework */; };
+		850666BB4FD1C5397F32430B /* WeekCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E7294C3638ADA1ADD64340 /* WeekCalculator.swift */; };
 		A11111110000000000000001 /* QuickWeekApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000001 /* QuickWeekApp.swift */; };
 		A11111110000000000000002 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000002 /* AppDelegate.swift */; };
 		A11111110000000000000003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000003 /* Assets.xcassets */; };
 		A11111110000000000000004 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000006 /* CalendarView.swift */; };
 		D62AEE222F34D6EF0003FC59 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = D62AEE212F34D6EF0003FC59 /* AppIcon.icon */; };
+		F5AC9F352EDB4D0001231F82 /* WeekCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F13D7C4624BC22497F65CA6 /* WeekCalculatorTests.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		D2304C83D082903D636CE589 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A17777770000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A14444440000000000000001;
+			remoteInfo = QuickWeek;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		2F13D7C4624BC22497F65CA6 /* WeekCalculatorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WeekCalculatorTests.swift; sourceTree = "<group>"; };
+		83E7294C3638ADA1ADD64340 /* WeekCalculator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WeekCalculator.swift; sourceTree = "<group>"; };
+		9D5A8755F2744AFCB140665B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		A10000000000000000000001 /* QuickWeekApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickWeekApp.swift; sourceTree = "<group>"; };
 		A10000000000000000000002 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A10000000000000000000003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -22,6 +38,7 @@
 		A10000000000000000000006 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		A10000000000000000000010 /* QuickWeek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickWeek.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D62AEE212F34D6EF0003FC59 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
+		FEBA61DCE29AC95C0A4C3C1A /* QuickWeekTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuickWeekTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,15 +49,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CA812AC9103FA764BC8091E0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0611BE03FD261096CB047FDE /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A770E5CD5423E1CEBE9505B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BE5EF143A77D6A642EBAE154 /* OS X */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A13333330000000000000001 = {
 			isa = PBXGroup;
 			children = (
 				A13333330000000000000002 /* QuickWeek */,
 				A13333330000000000000003 /* Products */,
 				D62AEE212F34D6EF0003FC59 /* AppIcon.icon */,
+				DFECC016167A52E265C6BB36 /* QuickWeekTests */,
+				3A770E5CD5423E1CEBE9505B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -52,6 +87,7 @@
 				A10000000000000000000006 /* CalendarView.swift */,
 				A10000000000000000000003 /* Assets.xcassets */,
 				A10000000000000000000004 /* QuickWeek.entitlements */,
+				83E7294C3638ADA1ADD64340 /* WeekCalculator.swift */,
 			);
 			path = QuickWeek;
 			sourceTree = "<group>";
@@ -60,8 +96,26 @@
 			isa = PBXGroup;
 			children = (
 				A10000000000000000000010 /* QuickWeek.app */,
+				FEBA61DCE29AC95C0A4C3C1A /* QuickWeekTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		BE5EF143A77D6A642EBAE154 /* OS X */ = {
+			isa = PBXGroup;
+			children = (
+				9D5A8755F2744AFCB140665B /* Cocoa.framework */,
+			);
+			name = "OS X";
+			sourceTree = "<group>";
+		};
+		DFECC016167A52E265C6BB36 /* QuickWeekTests */ = {
+			isa = PBXGroup;
+			children = (
+				2F13D7C4624BC22497F65CA6 /* WeekCalculatorTests.swift */,
+			);
+			name = QuickWeekTests;
+			path = QuickWeekTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,7 +128,7 @@
 				A15555550000000000000001 /* Sources */,
 				A12222220000000000000001 /* Frameworks */,
 				A15555550000000000000002 /* Resources */,
-				A15555550000000000000003 /* Build-Nummer setzen */,
+				A15555550000000000000003 /* Set build number */,
 			);
 			buildRules = (
 			);
@@ -84,6 +138,24 @@
 			productName = QuickWeek;
 			productReference = A10000000000000000000010 /* QuickWeek.app */;
 			productType = "com.apple.product-type.application";
+		};
+		C6EAF45B2E8C2595BFDC7729 /* QuickWeekTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 92D05DD6A80AE4486602B78D /* Build configuration list for PBXNativeTarget "QuickWeekTests" */;
+			buildPhases = (
+				895BE3FECF5A2515DA7FFF46 /* Sources */,
+				CA812AC9103FA764BC8091E0 /* Frameworks */,
+				B9805D1E1D9C891FF4421E47 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3C7BB30FB87D2C13D90A1BB5 /* PBXTargetDependency */,
+			);
+			name = QuickWeekTests;
+			productName = QuickWeekTests;
+			productReference = FEBA61DCE29AC95C0A4C3C1A /* QuickWeekTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -115,31 +187,10 @@
 			projectRoot = "";
 			targets = (
 				A14444440000000000000001 /* QuickWeek */,
+				C6EAF45B2E8C2595BFDC7729 /* QuickWeekTests */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		A15555550000000000000003 /* Build-Nummer setzen */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Build-Nummer setzen";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			alwaysOutOfDate = 1;
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "# Build-Nummer = Anzahl der Git-Commits\nBUILD_NUMBER=$(git -C \"${SRCROOT}\" rev-list --count HEAD 2>/dev/null || echo \"\")\nif [ -z \"$BUILD_NUMBER\" ] || [ \"$BUILD_NUMBER\" -lt 1 ]; then\n    echo \"warning: Konnte Git-Commit-Anzahl nicht ermitteln\"\n    exit 0\nfi\nPLIST=\"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\nif [ -f \"$PLIST\" ]; then\n    /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion ${BUILD_NUMBER}\" \"$PLIST\"\n    echo \"Build-Nummer: ${BUILD_NUMBER} (${BUILD_NUMBER} Git-Commits)\"\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXResourcesBuildPhase section */
 		A15555550000000000000002 /* Resources */ = {
@@ -151,9 +202,46 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B9805D1E1D9C891FF4421E47 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		A15555550000000000000003 /* Set build number */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Set build number";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "# Build number = number of Git commits\nBUILD_NUMBER=$(git -C \"${SRCROOT}\" rev-list --count HEAD 2>/dev/null || echo \"\")\nif [ -z \"$BUILD_NUMBER\" ] || [ \"$BUILD_NUMBER\" -lt 1 ]; then\n    echo \"warning: could not determine the Git commit count\"\n    exit 0\nfi\nPLIST=\"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\nif [ -f \"$PLIST\" ]; then\n    /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion ${BUILD_NUMBER}\" \"$PLIST\"\n    echo \"Build number: ${BUILD_NUMBER} (${BUILD_NUMBER} Git commits)\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		895BE3FECF5A2515DA7FFF46 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5AC9F352EDB4D0001231F82 /* WeekCalculatorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A15555550000000000000001 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -161,12 +249,40 @@
 				A11111110000000000000001 /* QuickWeekApp.swift in Sources */,
 				A11111110000000000000002 /* AppDelegate.swift in Sources */,
 				A11111110000000000000004 /* CalendarView.swift in Sources */,
+				850666BB4FD1C5397F32430B /* WeekCalculator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		3C7BB30FB87D2C13D90A1BB5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = QuickWeek;
+			target = A14444440000000000000001 /* QuickWeek */;
+			targetProxy = D2304C83D082903D636CE589 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		5130B65CE2D571A38D688133 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.marsvogel.QuickWeekTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QuickWeek.app/Contents/MacOS/QuickWeek";
+			};
+			name = Debug;
+		};
 		A18888880000000000000001 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -297,7 +413,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Quick Week";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSUIElement = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 Christopher Bischoff. All rights reserved.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 marsvogel";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -325,7 +441,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Quick Week";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSUIElement = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 Christopher Bischoff. All rights reserved.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 marsvogel";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -339,9 +455,36 @@
 			};
 			name = Release;
 		};
+		AEED937B728CCD1C7A2797B2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.marsvogel.QuickWeekTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QuickWeek.app/Contents/MacOS/QuickWeek";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		92D05DD6A80AE4486602B78D /* Build configuration list for PBXNativeTarget "QuickWeekTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AEED937B728CCD1C7A2797B2 /* Release */,
+				5130B65CE2D571A38D688133 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A16666660000000000000001 /* Build configuration list for PBXNativeTarget "QuickWeek" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

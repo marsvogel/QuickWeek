@@ -50,12 +50,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func updateCalendarWeek() {
-        let calendar = Calendar(identifier: .iso8601)
-        let weekNumber = calendar.component(.weekOfYear, from: Date())
-
-        if let button = statusItem.button {
-            button.title = String(format: "KW%02d", weekNumber)
-        }
+        statusItem.button?.title = WeekCalculator.menuBarTitle(for: Date())
     }
 
     @objc func handleDateChange() {
