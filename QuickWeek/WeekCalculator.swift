@@ -7,8 +7,14 @@ import Foundation
 /// ("Kalenderwoche", KW) is counted in German-speaking and most European contexts —
 /// which is exactly the number macOS does not show anywhere by default.
 enum WeekCalculator {
-    /// The ISO-8601 calendar used for every week calculation.
-    static let calendar = Calendar(identifier: .iso8601)
+    /// The ISO-8601 calendar used for every week calculation. Its time zone tracks the
+    /// system (`autoupdatingCurrent`) so the week still updates correctly if the Mac's
+    /// time zone changes at runtime — e.g. a laptop traveling across a week boundary.
+    static let calendar: Calendar = {
+        var calendar = Calendar(identifier: .iso8601)
+        calendar.timeZone = .autoupdatingCurrent
+        return calendar
+    }()
 
     /// The ISO-8601 calendar-week number (1...53) for the given date.
     static func isoWeekNumber(for date: Date, calendar: Calendar = WeekCalculator.calendar) -> Int {

@@ -40,7 +40,7 @@ macOS shows the date and time everywhere but never the week number, even though 
    xattr -dr com.apple.quarantine /Applications/QuickWeek.app
    ```
 
-If you’d rather not run an unsigned binary, [build it from source](#building-from-source) in a few seconds.
+If you’d rather not run software that isn’t notarized, [build it from source](#building-from-source) in a few seconds.
 
 ## Usage
 
