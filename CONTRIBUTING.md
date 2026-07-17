@@ -25,14 +25,14 @@ Please add tests for new logic where practical — the pure calendar math lives 
 
 ## Ground rules
 
-- **Everything checked into this repository is written in English**: code, comments, documentation, CI configuration, and commit messages. The one deliberate exception is **user-facing UI strings**, which are German on purpose — QuickWeek is built for a German-speaking audience (see below).
+- **Everything checked into this repository is written in English**: code, comments, string literals (including user-facing UI strings), documentation, CI configuration, and commit messages.
 - Commit messages follow the `type: subject` convention (e.g. `fix: …`, `feat: …`, `docs: …`), loosely per [Conventional Commits](https://www.conventionalcommits.org). No extra tooling is required.
 - Keep the app small and dependency-free — it currently builds with no third-party dependencies.
 - Never commit personal data or absolute user paths.
 
 ## Localization
 
-The interface is German today (the menu bar reads `KW29`, the calendar says `Heute`, months use `de_DE`). An **English localization is explicitly welcome** and a great first contribution — see the [good first issues](https://github.com/marsvogel/QuickWeek/labels/good%20first%20issue).
+QuickWeek ships in English (the menu bar reads `CW29`, the calendar says `Today`). **Localizations are explicitly welcome** and a great first contribution — the user-facing strings live in `CalendarView` and `AppDelegate`. See the [good first issues](https://github.com/marsvogel/QuickWeek/labels/good%20first%20issue).
 
 ## AI-assisted contributions
 

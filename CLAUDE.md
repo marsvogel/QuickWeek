@@ -1,7 +1,7 @@
 # CLAUDE.md
 
 QuickWeek is a macOS menu-bar app that shows the current ISO-8601 calendar week
-(the German *Kalenderwoche*, e.g. `KW29`) and opens a month-calendar popover.
+(the ISO-8601 calendar week, e.g. `CW29`) and opens a month-calendar popover.
 
 ## Project language
 
@@ -9,10 +9,9 @@ The repository language is English. Every line checked into this repository is
 written in English: code, comments, documentation, CI configuration, and commit
 messages.
 
-The single, deliberate exception is **user-facing UI strings**, which are German
-on purpose (`KW`, `Heute`, `Beenden`, `de_DE` month names) because QuickWeek is
-built for a German-speaking audience. Keep UI copy German unless a change adds a
-proper localization.
+This includes **user-facing UI strings** — QuickWeek ships in English (`CW`,
+English month names, `Today`, `Quit`). Localizations are welcome, but English is
+the base language.
 
 This rule applies to repository content only — keep conversing with the user in
 the user's native language.

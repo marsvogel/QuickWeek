@@ -11,14 +11,14 @@
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/marsvogel/QuickWeek)
 [![Built with Claude Code](https://img.shields.io/badge/Built_with-Claude_Code-D97757?logo=claude&logoColor=fff)](./AI_DISCLOSURE.md)
 
-A macOS menu bar app that shows the current **ISO-8601 calendar week** — the German *Kalenderwoche* (KW) — right where you already look.
+A macOS menu bar app that shows the current **ISO-8601 calendar week** (CW) — the *Kalenderwoche* much of Europe plans by — right where you already look.
 
-macOS shows the date and time everywhere but never the week number, even though much of Europe schedules by it (“let’s ship in KW32”). QuickWeek puts it in your menu bar and one click away.
+macOS shows the date and time everywhere but never the week number, even though much of Europe schedules by it (“let’s ship in CW32”). QuickWeek puts it in your menu bar and one click away.
 
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/hero-dark.png">
-    <img src="docs/hero-light.png" alt="QuickWeek showing KW29 in the macOS menu bar next to the open month-calendar popover" width="720">
+    <img src="docs/hero-light.png" alt="QuickWeek showing CW29 in the macOS menu bar next to the open month-calendar popover" width="720">
   </picture>
 </p>
 
@@ -44,10 +44,10 @@ If you’d rather not run software that isn’t notarized, [build it from source
 
 ## Usage
 
-After launch, the current week — e.g. **KW29** — appears in the menu bar. There is no Dock icon and no window.
+After launch, the current week — e.g. **CW29** — appears in the menu bar. There is no Dock icon and no window.
 
-- **Left-click** the menu-bar item to open a month calendar. Every row shows its week number; the current week is tinted and today is circled. **Heute** jumps back to the current month.
-- **Right-click** for a small menu (Quit / *Beenden*).
+- **Left-click** the menu-bar item to open a month calendar. Every row shows its week number; the current week is tinted and today is circled. **Today** jumps back to the current month.
+- **Right-click** for a small menu (Quit).
 - The number refreshes automatically at midnight and when your Mac wakes from sleep.
 
 Weeks follow **ISO-8601**: they start on Monday, and week 1 is the week containing the year’s first Thursday — the same counting used for the *Kalenderwoche*.
@@ -85,7 +85,7 @@ xcodebuild test -project QuickWeek.xcodeproj -scheme QuickWeek
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). Security issues: see [SECURITY.md](SECURITY.md).
 
-The interface is German today — an **English localization is a welcome first contribution** (see [good first issues](https://github.com/marsvogel/QuickWeek/labels/good%20first%20issue)).
+QuickWeek ships in English — **localizations are a welcome first contribution** (see [good first issues](https://github.com/marsvogel/QuickWeek/labels/good%20first%20issue)).
 
 ## About the name
 

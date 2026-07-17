@@ -12,9 +12,9 @@ PATCH = a fix.
 
 ### Added
 
-- Menu-bar item showing the current ISO-8601 calendar week, e.g. `KW29`.
+- Menu-bar item showing the current ISO-8601 calendar week, e.g. `CW29`.
 - Popover month calendar with a week-number column, current-week and today
-  highlighting, month navigation, and a `Heute` (Today) button.
+  highlighting, month navigation, and a Today button.
 - Automatic refresh at midnight and when the Mac wakes from sleep.
 - Unit tests for the calendar math (`WeekCalculator`).
 - Continuous integration: SwiftLint (`--strict`), tests, CodeQL, and an OpenSSF

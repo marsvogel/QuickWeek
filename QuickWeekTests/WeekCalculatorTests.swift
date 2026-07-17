@@ -36,9 +36,9 @@ final class WeekCalculatorTests: XCTestCase {
     }
 
     func testMenuBarTitleIsZeroPadded() {
-        XCTAssertEqual(WeekCalculator.menuBarTitle(for: date(2026, 7, 17), calendar: calendar), "KW29")
+        XCTAssertEqual(WeekCalculator.menuBarTitle(for: date(2026, 7, 17), calendar: calendar), "CW29")
         // Weeks below ten are padded to keep the menu-bar width stable.
-        XCTAssertEqual(WeekCalculator.menuBarTitle(for: date(2026, 2, 23), calendar: calendar), "KW09")
+        XCTAssertEqual(WeekCalculator.menuBarTitle(for: date(2026, 2, 23), calendar: calendar), "CW09")
     }
 
     func testWeeksInMonthShapeForJuly2026() {

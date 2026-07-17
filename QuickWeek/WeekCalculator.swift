@@ -4,8 +4,8 @@ import Foundation
 ///
 /// Every calculation uses an ISO-8601 calendar: weeks start on Monday and week 1 is
 /// the week containing the year's first Thursday. That matches how the calendar week
-/// ("Kalenderwoche", KW) is counted in German-speaking and most European contexts —
-/// which is exactly the number macOS does not show anywhere by default.
+/// (CW — the *Kalenderwoche* used across much of Europe) is counted, which is exactly
+/// the number macOS does not show anywhere by default.
 enum WeekCalculator {
     /// The ISO-8601 calendar used for every week calculation. Its time zone tracks the
     /// system (`autoupdatingCurrent`) so the week still updates correctly if the Mac's
@@ -21,9 +21,9 @@ enum WeekCalculator {
         calendar.component(.weekOfYear, from: date)
     }
 
-    /// The menu-bar title for the given date, e.g. `"KW29"` (zero-padded to two digits).
+    /// The menu-bar title for the given date, e.g. `"CW29"` (zero-padded to two digits).
     static func menuBarTitle(for date: Date, calendar: Calendar = WeekCalculator.calendar) -> String {
-        String(format: "KW%02d", isoWeekNumber(for: date, calendar: calendar))
+        String(format: "CW%02d", isoWeekNumber(for: date, calendar: calendar))
     }
 
     /// The full weeks — each exactly seven days, Monday first — spanned by the month

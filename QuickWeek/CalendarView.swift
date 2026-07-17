@@ -4,7 +4,7 @@ struct CalendarView: View {
     @State private var displayedMonth: Date = Date()
 
     private let calendar = WeekCalculator.calendar
-    private let weekdaySymbols = ["M", "D", "M", "D", "F", "S", "S"]
+    private let weekdaySymbols = ["M", "T", "W", "T", "F", "S", "S"]
 
     var body: some View {
         VStack(spacing: 12) {
@@ -85,7 +85,7 @@ struct CalendarView: View {
                 .padding(.top, 4)
 
             Button(action: goToToday) {
-                Text("Heute")
+                Text("Today")
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.plain)
@@ -104,7 +104,7 @@ struct CalendarView: View {
 
     private var monthYearString: String {
         let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "de_DE")
+        formatter.locale = Locale(identifier: "en_US")
         formatter.dateFormat = "MMMM yyyy"
         return formatter.string(from: displayedMonth)
     }

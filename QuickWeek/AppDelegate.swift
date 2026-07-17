@@ -65,9 +65,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if event.type == .rightMouseUp {
             // Right click - show context menu
             let menu = NSMenu()
-            menu.addItem(NSMenuItem(title: "Quick Week", action: nil, keyEquivalent: ""))
+            menu.addItem(NSMenuItem(title: "QuickWeek", action: nil, keyEquivalent: ""))
             menu.addItem(NSMenuItem.separator())
-            menu.addItem(NSMenuItem(title: "Beenden", action: #selector(quit), keyEquivalent: "q"))
+            menu.addItem(NSMenuItem(title: "Quit", action: #selector(quit), keyEquivalent: "q"))
             statusItem.menu = menu
             statusItem.button?.performClick(nil)
             statusItem.menu = nil
