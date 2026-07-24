@@ -24,14 +24,16 @@ the user's native language.
 
 ## Code comments
 
-Do not write explanatory comments. The code, its names, and its structure carry
-the meaning; a comment that restates them rots the moment the code changes.
-Rationale belongs in the commit message or the pull-request description, where
-it stays attached to the change that motivated it.
+Do not write explanatory comments — including Swift doc comments (`///`). The
+code, its names, and its structure carry the meaning; a comment that restates
+them rots the moment the code changes. Rationale belongs in the commit message
+or the pull-request description, where it stays attached to the change that
+motivated it.
 
-The exception is comments a tool reads. Keep the `# vX.Y.Z` marker next to a
+The exception is comments a tool acts on. Keep the `# vX.Y.Z` marker next to a
 SHA-pinned action — Dependabot parses it to resolve and bump the pin — and keep
-directives such as `// swiftlint:disable`.
+directives such as `// swiftlint:disable`. `// MARK:` section markers are
+navigation, not explanation, and may stay.
 
 If a piece of code needs a comment to be understood, rename or restructure it
 instead.
