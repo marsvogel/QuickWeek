@@ -15,6 +15,12 @@ xcodebuild -project QuickWeek.xcodeproj -target QuickWeek -configuration Release
 
 The app lands in `build/Release/QuickWeek.app`. Note that plain builds use the build **target** (`-target`), while tests use the shared **scheme** (`-scheme`).
 
+`CFBundleVersion` is derived from the Git commit count by the "Set build number" build phase, which is why CI checks out the full history. That build phase is inlined into `project.pbxproj` because the build sandbox cannot read external files; `Scripts/increment-build-number.sh` is a reference copy of the same logic for manual runs:
+
+```sh
+PROJECT_DIR="$(pwd)" bash Scripts/increment-build-number.sh
+```
+
 ## Testing
 
 ```sh
@@ -25,7 +31,8 @@ Please add tests for new logic where practical — the pure calendar math lives 
 
 ## Ground rules
 
-- **Everything checked into this repository is written in English**: code, comments, string literals (including user-facing UI strings), documentation, CI configuration, and commit messages.
+- **Everything checked into this repository is written in English**: code, string literals (including user-facing UI strings), documentation, CI configuration, and commit messages.
+- **No explanatory comments** — code should say what it does through names and structure, and doc comments (`///`) count as comments too. If something needs explaining, rename or restructure it, and put the reasoning in the commit message or the pull request. Comments a tool acts on stay: the `# vX.Y.Z` marker on SHA-pinned actions, `// swiftlint:` directives, and `// MARK:` navigation.
 - Commit messages follow the `type: subject` convention (e.g. `fix: …`, `feat: …`, `docs: …`), loosely per [Conventional Commits](https://www.conventionalcommits.org). No extra tooling is required.
 - Keep the app small and dependency-free — it currently builds with no third-party dependencies.
 - Never commit personal data or absolute user paths.
