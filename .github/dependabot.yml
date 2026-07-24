@@ -4,7 +4,6 @@ updates:
     directory: /
     schedule:
       interval: weekly
-    # Bundle all GitHub Actions bumps into one PR to keep the noise down.
     groups:
       actions:
         patterns:

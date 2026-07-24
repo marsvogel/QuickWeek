@@ -1,12 +1,4 @@
 #!/bin/bash
-# Sets the build number automatically from the number of Git commits.
-#
-# NOTE: The script that actually runs is inlined into the Xcode build phase
-# "Set build number" (project.pbxproj), because the build sandbox does not
-# allow reading external files.
-#
-# This file is kept only as a reference and for manual invocation:
-#   PROJECT_DIR="$(pwd)" bash Scripts/increment-build-number.sh
 
 set -e
 
