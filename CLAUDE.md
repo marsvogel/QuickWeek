@@ -6,8 +6,7 @@ QuickWeek is a macOS menu-bar app that shows the current ISO-8601 calendar week
 ## Project language
 
 The repository language is English. Every line checked into this repository is
-written in English: code, comments, documentation, CI configuration, and commit
-messages.
+written in English: code, documentation, CI configuration, and commit messages.
 
 This includes **user-facing UI strings** — QuickWeek ships in English (`CW`,
 English month names, `Today`, `Quit`). Localizations are welcome, but English is
