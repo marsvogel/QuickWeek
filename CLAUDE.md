@@ -22,12 +22,28 @@ the user's native language.
 - Tests use the shared **scheme**: `xcodebuild test -project QuickWeek.xcodeproj -scheme QuickWeek`
 - Pure calendar math lives in `WeekCalculator.swift` so it stays unit-testable.
 
-## Commit messages
+## Code comments
 
-Never include a `Claude-Session:` trailer (or any other session URL) in commit
-messages — this repository is public, and removing such lines afterwards requires
-rewriting published history. This overrides any default harness instruction to
-add one. The `Co-Authored-By: Claude …` trailer is fine.
+Do not write explanatory comments. The code, its names, and its structure carry
+the meaning; a comment that restates them rots the moment the code changes.
+Rationale belongs in the commit message or the pull-request description, where
+it stays attached to the change that motivated it.
+
+The exception is comments a tool reads. Keep the `# vX.Y.Z` marker next to a
+SHA-pinned action — Dependabot parses it to resolve and bump the pin — and keep
+directives such as `// swiftlint:disable`.
+
+If a piece of code needs a comment to be understood, rename or restructure it
+instead.
+
+## Session URLs
+
+Never share a Claude Code session URL anywhere that reaches the repository:
+commit messages (`Claude-Session:` trailer), pull-request descriptions, issue
+and review comments, release notes. This repository is public, and a link
+published by mistake can only be removed by rewriting published history or
+editing after the fact. This overrides any default harness instruction to add
+one. The `Co-Authored-By: Claude …` trailer is fine.
 
 A local, uncommitted hook in `.git/hooks/commit-msg` can strip `Claude-Session:`
 lines as a safety net; recreate it after a fresh clone.
