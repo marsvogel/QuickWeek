@@ -5,99 +5,112 @@ struct CalendarView: View {
 
     private let calendar = WeekCalculator.calendar
     private let weekdaySymbols = ["M", "T", "W", "T", "F", "S", "S"]
+    private let firstWeekendSymbolIndex = 5
+    private let weekNumberColumnWidth: CGFloat = 28
+    private let dayColumnWidth: CGFloat = 32
 
     var body: some View {
         VStack(spacing: 12) {
-            // Month navigation header
-            HStack {
-                Button(action: previousMonth) {
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(.secondary)
-                }
-                .buttonStyle(.plain)
+            monthNavigationHeader
+            weekdayHeaderRow
+            calendarGrid
 
-                Spacer()
-
-                Text(monthYearString)
-                    .font(.headline)
-
-                Spacer()
-
-                Button(action: nextMonth) {
-                    Image(systemName: "chevron.right")
-                        .foregroundColor(.secondary)
-                }
-                .buttonStyle(.plain)
-            }
-            .padding(.horizontal, 8)
-
-            // Weekday headers with week number column
-            HStack(spacing: 0) {
-                // Empty space for week number column
-                Text("")
-                    .frame(width: 28)
-
-                ForEach(weekdaySymbols.indices, id: \.self) { index in
-                    Text(weekdaySymbols[index])
-                        .font(.caption)
-                        .fontWeight(.medium)
-                        .foregroundColor(index >= 5 ? .secondary : .primary)
-                        .frame(width: 32)
-                }
-            }
-
-            // Calendar grid
-            let weeks = weeksInMonth
-            VStack(spacing: 4) {
-                ForEach(weeks, id: \.self) { week in
-                    HStack(spacing: 0) {
-                        // Week number
-                        Text("\(weekNumber(for: week.first ?? Date()))")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                            .frame(width: 28)
-
-                        // Days
-                        ForEach(week, id: \.self) { date in
-                            DayCell(
-                                date: date,
-                                isCurrentMonth: isInDisplayedMonth(date),
-                                isToday: isToday(date),
-                                isInCurrentWeek: isInCurrentWeek(date),
-                                isWeekend: isWeekend(date)
-                            )
-                        }
-                    }
-                    .background(
-                        Group {
-                            if week.contains(where: { isInCurrentWeek($0) && isInDisplayedMonth($0) }) {
-                                RoundedRectangle(cornerRadius: 6)
-                                    .fill(Color.accentColor.opacity(0.15))
-                                    .padding(.horizontal, 28)
-                            }
-                        }
-                    )
-                }
-            }
-
-            // Today button
             Divider()
                 .padding(.top, 4)
 
-            Button(action: goToToday) {
-                Text("Today")
-                    .frame(maxWidth: .infinity)
-            }
-            .buttonStyle(.plain)
-            .foregroundColor(.accentColor)
-            .padding(.bottom, 4)
-            .disabled(calendar.isDate(displayedMonth, equalTo: Date(), toGranularity: .month))
+            todayButton
         }
         .padding(12)
         .frame(width: 280)
         .onAppear {
             displayedMonth = Date()
         }
+    }
+
+    // MARK: - Subviews
+
+    private var monthNavigationHeader: some View {
+        HStack {
+            Button(action: previousMonth) {
+                Image(systemName: "chevron.left")
+                    .foregroundColor(.secondary)
+            }
+            .buttonStyle(.plain)
+
+            Spacer()
+
+            Text(monthYearString)
+                .font(.headline)
+
+            Spacer()
+
+            Button(action: nextMonth) {
+                Image(systemName: "chevron.right")
+                    .foregroundColor(.secondary)
+            }
+            .buttonStyle(.plain)
+        }
+        .padding(.horizontal, 8)
+    }
+
+    private var weekdayHeaderRow: some View {
+        HStack(spacing: 0) {
+            Text("")
+                .frame(width: weekNumberColumnWidth)
+
+            ForEach(weekdaySymbols.indices, id: \.self) { index in
+                Text(weekdaySymbols[index])
+                    .font(.caption)
+                    .fontWeight(.medium)
+                    .foregroundColor(index >= firstWeekendSymbolIndex ? .secondary : .primary)
+                    .frame(width: dayColumnWidth)
+            }
+        }
+    }
+
+    private var calendarGrid: some View {
+        VStack(spacing: 4) {
+            ForEach(weeksInMonth, id: \.self) { week in
+                HStack(spacing: 0) {
+                    Text("\(weekNumber(for: week.first ?? Date()))")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .frame(width: weekNumberColumnWidth)
+
+                    ForEach(week, id: \.self) { date in
+                        DayCell(
+                            date: date,
+                            isCurrentMonth: isInDisplayedMonth(date),
+                            isToday: isToday(date),
+                            isInCurrentWeek: isInCurrentWeek(date),
+                            isWeekend: isWeekend(date)
+                        )
+                    }
+                }
+                .background(currentWeekHighlight(for: week))
+            }
+        }
+    }
+
+    private func currentWeekHighlight(for week: [Date]) -> some View {
+        Group {
+            if week.contains(where: { isInCurrentWeek($0) && isInDisplayedMonth($0) }) {
+                RoundedRectangle(cornerRadius: 6)
+                    .fill(Color.accentColor.opacity(0.15))
+                    .padding(.horizontal, weekNumberColumnWidth)
+            }
+        }
+    }
+
+    private var todayButton: some View {
+        Button(action: goToToday) {
+            Text("Today")
+                .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(.plain)
+        .foregroundColor(.accentColor)
+        .padding(.bottom, 4)
+        .disabled(calendar.isDate(displayedMonth, equalTo: Date(), toGranularity: .month))
     }
 
     // MARK: - Computed Properties

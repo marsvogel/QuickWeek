@@ -1,6 +1,3 @@
-# OpenSSF Scorecard — a weekly automated audit of the repository's security
-# posture (branch protection, pinned dependencies, token permissions, …).
-# Results surface in the Security tab and, once published, on the Scorecard badge.
 name: Scorecard
 
 on:
@@ -18,8 +15,8 @@ jobs:
     name: Scorecard analysis
     runs-on: ubuntu-latest
     permissions:
-      security-events: write # upload the SARIF result to code scanning
-      id-token: write # publish results to the public Scorecard API
+      security-events: write
+      id-token: write
       contents: read
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
